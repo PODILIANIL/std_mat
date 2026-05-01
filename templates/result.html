@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; padding: 20px; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #007bff; margin-bottom: 20px; }
+        .result { font-size: 1.5em; margin-top: 20px; }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p class="result">
+            The student is predicted to: <span class="{% if prediction == 'Pass' %}pass{% else %}fail{% endif %}">{{ prediction }}</span>
+        </p>
+        <p class="result">
+            Probability of passing: {{ probability }}
+        </p>
+        <a href="/" class="btn btn-primary">Make another prediction</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; padding: 20px; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #007bff; margin-bottom: 20px; }
+        label { font-weight: bold; }
+        .form-group { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Predict Student Final Grade</h1>
+        <form action="/predict" method="post">
+            <!-- School -->
+            <div class="form-group">
+                <label for="school">School:</label>
+                <select class="form-control" id="school" name="school">
+                    <option value="GP">Gabriel Pereira</option>
+                    <option value="MS">Mousinho da Silveira</option>
+                </select>
+            </div>
+            <!-- Sex -->
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select class="form-control" id="sex" name="sex">
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+            </div>
+            <!-- Age -->
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" min="15" max="22" value="17">
+            </div>
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <select class="form-control" id="address" name="address">
+                    <option value="U">Urban</option>
+                    <option value="R">Rural</option>
+                </select>
+            </div>
+            <!-- Famsize -->
+            <div class="form-group">
+                <label for="famsize">Family Size:</label>
+                <select class="form-control" id="famsize" name="famsize">
+                    <option value="GT3">Greater than 3</option>
+                    <option value="LE3">Less or equal to 3</option>
+                </select>
+            </div>
+            <!-- Pstatus -->
+            <div class="form-group">
+                <label for="Pstatus">Parents Cohabitation Status:</label>
+                <select class="form-control" id="Pstatus" name="Pstatus">
+                    <option value="T">Together</option>
+                    <option value="A">Apart</option>
+                </select>
+            </div>
+            <!-- Medu -->
+            <div class="form-group">
+                <label for="Medu">Mother's Education (0 - 4):</label>
+                <input type="number" class="form-control" id="Medu" name="Medu" min="0" max="4" value="2">
+            </div>
+            <!-- Fedu -->
+            <div class="form-group">
+                <label for="Fedu">Father's Education (0 - 4):</label>
+                <input type="number" class="form-control" id="Fedu" name="Fedu" min="0" max="4" value="2">
+            </div>
+            <!-- Mjob -->
+            <div class="form-group">
+                <label for="Mjob">Mother's Job:</label>
+                <select class="form-control" id="Mjob" name="Mjob">
+                    <option value="at_home">At Home</option>
+                    <option value="health">Health</option>
+                    <option value="other">Other</option>
+                    <option value="services">Services</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <!-- Fjob -->
+            <div class="form-group">
+                <label for="Fjob">Father's Job:</label>
+                <select class="form-control" id="Fjob" name="Fjob">
+                    <option value="at_home">At Home</option>
+                    <option value="health">Health</option>
+                    <option value="other">Other</option>
+                    <option value="services">Services</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <!-- Reason -->
+            <div class="form-group">
+                <label for="reason">Reason to choose this school:</label>
+                <select class="form-control" id="reason" name="reason">
+                    <option value="home">Close to Home</option>
+                    <option value="reputation">School Reputation</option>
+                    <option value="course">Course Preference</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <!-- Guardian -->
+            <div class="form-group">
+                <label for="guardian">Guardian:</label>
+                <select class="form-control" id="guardian" name="guardian">
+                    <option value="mother">Mother</option>
+                    <option value="father">Father</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <!-- Traveltime -->
+            <div class="form-group">
+                <label for="traveltime">Travel Time to School (1 - 4):</label>
+                <input type="number" class="form-control" id="traveltime" name="traveltime" min="1" max="4" value="1">
+            </div>
+            <!-- Studytime -->
+            <div class="form-group">
+                <label for="studytime">Weekly Study Time (1 - 4):</label>
+                <input type="number" class="form-control" id="studytime" name="studytime" min="1" max="4" value="2">
+            </div>
+            <!-- Failures -->
+            <div class="form-group">
+                <label for="failures">Past Class Failures (0 - 4):</label>
+                <input type="number" class="form-control" id="failures" name="failures" min="0" max="4" value="0">
+            </div>
+            <!-- Schoolsup -->
+            <div class="form-group">
+                <label for="schoolsup">Extra Educational Support:</label>
+                <select class="form-control" id="schoolsup" name="schoolsup">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Famsup -->
+            <div class="form-group">
+                <label for="famsup">Family Educational Support:</label>
+                <select class="form-control" id="famsup" name="famsup">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Paid -->
+            <div class="form-group">
+                <label for="paid">Extra Paid Classes:</label>
+                <select class="form-control" id="paid" name="paid">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Activities -->
+            <div class="form-group">
+                <label for="activities">Extra-curricular Activities:</label>
+                <select class="form-control" id="activities" name="activities">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Nursery -->
+            <div class="form-group">
+                <label for="nursery">Attended Nursery School:</label>
+                <select class="form-control" id="nursery" name="nursery">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Higher -->
+            <div class="form-group">
+                <label for="higher">Wants to take Higher Education:</label>
+                <select class="form-control" id="higher" name="higher">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Internet -->
+            <div class="form-group">
+                <label for="internet">Internet Access at Home:</label>
+                <select class="form-control" id="internet" name="internet">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Romantic -->
+            <div class="form-group">
+                <label for="romantic">In a Romantic Relationship:</label>
+                <select class="form-control" id="romantic" name="romantic">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <!-- Famrel -->
+            <div class="form-group">
+                <label for="famrel">Family Relationship Quality (1 - 5):</label>
+                <input type="number" class="form-control" id="famrel" name="famrel" min="1" max="5" value="3">
+            </div>
+            <!-- Freetime -->
+            <div class="form-group">
+                <label for="freetime">Free Time After School (1 - 5):</label>
+                <input type="number" class="form-control" id="freetime" name="freetime" min="1" max="5" value="3">
+            </div>
+            <!-- Goout -->
+            <div class="form-group">
+                <label for="goout">Going Out with Friends (1 - 5):</label>
+                <input type="number" class="form-control" id="goout" name="goout" min="1" max="5" value="3">
+            </div>
+            <!-- Dalc -->
+            <div class="form-group">
+                <label for="Dalc">Workday Alcohol Consumption (1 - 5):</label>
+                <input type="number" class="form-control" id="Dalc" name="Dalc" min="1" max="5" value="1">
+            </div>
+            <!-- Walc -->
+            <div class="form-group">
+                <label for="Walc">Weekend Alcohol Consumption (1 - 5):</label>
+                <input type="number" class="form-control" id="Walc" name="Walc" min="1" max="5" value="1">
+            </div>
+            <!-- Health -->
+            <div class="form-group">
+                <label for="health">Current Health Status (1 - 5):</label>
+                <input type="number" class="form-control" id="health" name="health" min="1" max="5" value="3">
+            </div>
+            <!-- Absences -->
+            <div class="form-group">
+                <label for="absences">Number of School Absences:</label>
+                <input type="number" class="form-control" id="absences" name="absences" min="0" value="0">
+            </div>
+            <!-- G1 -->
+            <div class="form-group">
+                <label for="G1">First Period Grade (0 - 20):</label>
+                <input type="number" class="form-control" id="G1" name="G1" min="0" max="20" value="10">
+            </div>
+            <!-- G2 -->
+            <div class="form-group">
+                <label for="G2">Second Period Grade (0 - 20):</label>
+                <input type="number" class="form-control" id="G2" name="G2" min="0" max="20" value="10">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Predict Final Grade</button>
+        </form>
+    </div>
+</body>
+</html>
+templates/result.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; padding: 20px; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #007bff; margin-bottom: 20px; }
+        .result { font-size: 1.5em; margin-top: 20px; }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p class="result">
+            The student is predicted to: <span class="{% if prediction == 'Pass' %}pass{% else %}fail{% endif %}">{{ prediction }}</span>
+        </p>
+        <p class="result">
+            Probability of passing: {{ probability }}
+        </p>
+        <a href="/" class="btn btn-primary">Make another prediction</a>
+    </div>
+</body>
+</html>
